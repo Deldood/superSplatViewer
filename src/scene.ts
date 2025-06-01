@@ -25,6 +25,13 @@ import { Splat } from './splat';
 import { SplatOverlay } from './splat-overlay';
 import { Underlay } from './underlay';
 
+interface ModelLoadRequest {
+    url?: string;
+    contents?: ArrayBuffer;
+    filename?: string;
+    maxAnisotropy?: number;
+    animationFrame?: boolean;       // animations disable morton re-ordering at load time for faster loading
+}
 class Scene {
     events: Events;
     config: SceneConfig;
@@ -216,9 +223,31 @@ class Scene {
         this.add(this.underlay);
     }
 
+    loadSplatModel(loadRequest: ModelLoadRequest) {
+        this.assetLoader.loadModel(loadRequest)
+            .then((splat: Splat) => {
+                this.clear(); // optional: vorherige Splats entfernen
+                this.add(splat); // zur Szene hinzufügen
+                this.forceRender = true;
+    
+            })
+            .catch((err) => {
+                console.error('Failed to load splat model:', err);
+                this.events.fire('error', err);
+            });
+    }
+
     start() {
         // start the app
+        console.log("loading")
         this.app.start();
+        this.assetLoader.loadModel({
+            url: 'model/IDF.ply',
+            filename: 'IDF.ply'
+        }).then((splat) => {
+            this.add(splat);
+            splat.entity.setLocalEulerAngles(90, 0, 0);
+        });
     }
 
     clear() {

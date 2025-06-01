@@ -418,8 +418,32 @@ class Camera extends Element {
 
         this.scene.events.fire('camera.resize', { width, height });
     }
+    private walkablePolygon: { x: number; y: number }[] | null = null;
 
+    private savedFocalTween = new TweenValue({ x: 0, y: 0, z: 0 });
+
+
+
+    setWalkablePolygon(polygon: { x: number; y: number }[]): void {
+    this.walkablePolygon = polygon;
+    }
+    private isPointInPolygon(point: { x: number; y: number }, polygon: { x: number; y: number }[]): boolean {
+        let inside = false;
+        for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+            const xi = polygon[i].x, yi = polygon[i].y;
+            const xj = polygon[j].x, yj = polygon[j].y;
+    
+            const intersect = ((yi > point.y) !== (yj > point.y)) &&
+                (point.x < (xj - xi) * (point.y - yi) / (yj - yi + Number.EPSILON) + xi);
+            if (intersect) inside = !inside;
+        }
+        return inside;
+    }
+
+    private wasInside = false;
+     
     onUpdate(deltaTime: number) {
+
         // controller update
         this.controller.update(deltaTime);
 
@@ -436,6 +460,31 @@ class Camera extends Element {
         cameraPosition.mulScalar(distance.distance * this.sceneRadius / this.fovFactor);
         cameraPosition.add(this.focalPointTween.value);
 
+
+        if (this.walkablePolygon && this.walkablePolygon.length > 2) {
+            cameraPosition.y = 0
+
+            const checkPoint = { x: this.focalPointTween.target.x, y: this.focalPointTween.target.z };
+            const inside = this.isPointInPolygon(checkPoint, this.walkablePolygon);
+            
+
+            if (!inside && this.wasInside) {
+
+                this.focalPointTween = this.savedFocalTween.clone();
+
+                calcForwardVec(forwardVec, azimElev.azim, azimElev.elev);
+                cameraPosition.copy(forwardVec);
+                cameraPosition.mulScalar(distance.distance * this.sceneRadius / this.fovFactor);
+                cameraPosition.add(this.focalPointTween.value);
+                cameraPosition.y = 0
+            }
+            else if(inside){
+
+                this.savedFocalTween = this.focalPointTween.clone();
+                this.wasInside = true;
+               
+            }
+        }
         this.entity.setLocalPosition(cameraPosition);
         this.entity.setLocalEulerAngles(azimElev.elev, azimElev.azim, 0);
 
@@ -445,6 +494,7 @@ class Camera extends Element {
         camera.orthoHeight = this.distanceTween.value.distance * this.sceneRadius / this.fovFactor * (this.fov / 90) * (camera.horizontalFov ? this.scene.targetSize.height / this.scene.targetSize.width : 1);
         camera.camera._updateViewProjMat();
     }
+    
 
     fitClippingPlanes(cameraPosition: Vec3, forwardVec: Vec3) {
         const bound = this.scene.bound;

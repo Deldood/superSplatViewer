@@ -70,6 +70,14 @@ class TweenValue {
             this.ops.copy(this.value, this.target);
         }
     }
+    clone(): TweenValue {
+        const newTween = new TweenValue(this.ops.clone(this.value));
+        this.ops.copy(newTween.source, this.source);
+        this.ops.copy(newTween.target, this.target);
+        newTween.timer = this.timer;
+        newTween.transitionTime = this.transitionTime;
+        return newTween;
+    }
 }
 
 export { TweenValue };
