@@ -2,7 +2,7 @@
 
 Uses SuperSplat as base and has a Tool to draw in a Zone for the Camera to move inside. Also adjusts Camera to get a first person experience.
 
-To learn more about SuperSplat, please refer to the [User Guide](https://github.com/playcanvas/supersplat/wiki).
+To learn more about SuperSplat, please refer to the [original git](https://github.com/playcanvas/supersplat).
 
 ## Local Development
 
@@ -39,11 +39,5 @@ To initialize a local development environment for SuperSplat, ensure you have [N
 
 When changes to the source are detected, SuperSplat is rebuilt automatically. Simply refresh your browser to see your changes.
 
-## Contributors
 
-SuperSplat is made possible by our amazing open source community:
-
-<a href="https://github.com/playcanvas/supersplat/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=playcanvas/supersplat" />
-</a>
 # superSplatViewer
