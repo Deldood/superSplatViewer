@@ -39,6 +39,8 @@ To initialize a local development environment for SuperSplat, ensure you have [N
 
 When changes to the source are detected, SuperSplat is rebuilt automatically. Simply refresh your browser to see your changes.
 
+# superSplatViewer
+
 ## Using Area Tool
 1. ### Load the splat automatically
    To automatically load the gaussian splat (in ply format) you can put in in the <projectroot>/dist/model folder. On startup it will load the model and rotate it to get it        upright (if Gaussian Splatting model was created with splatfacto)
@@ -58,6 +60,4 @@ When changes to the source are detected, SuperSplat is rebuilt automatically. Si
 4. ### Going into first person view
    By reselecting the Walkable Area Tool in the bottom Toolbar you get transportet to first person View.
    Hold left mouse button to look around and arrow keys to move.
-   
-      
-# superSplatViewer
+
