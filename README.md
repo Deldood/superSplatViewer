@@ -1,14 +1,8 @@
-# SuperSplat - 3D Gaussian Splat Editor
+# SuperSplat - 3D Gaussian Splat Editor with Walkable Area
 
-| [SuperSplat Editor](https://superspl.at/editor) | [User Guide](https://github.com/playcanvas/supersplat/wiki) | [Forum](https://forum.playcanvas.com/) | [Discord](https://discord.gg/RSaMRzg) |
+Uses SuperSplat as base and has a Tool to draw in a Zone for the Camera to move inside. Also adjusts Camera to get a first person experience.
 
-SuperSplat is a free and open source tool for inspecting, editing, optimizing and publishing 3D Gaussian Splats. It is built on web technologies and runs in the browser, so there's nothing to download or install.
-
-A live version of this tool is available at: https://playcanvas.com/supersplat/editor
-
-![image](https://github.com/user-attachments/assets/b6cbb5cc-d3cc-4385-8c71-ab2807fd4fba)
-
-To learn more about using SuperSplat, please refer to the [User Guide](https://github.com/playcanvas/supersplat/wiki).
+To learn more about SuperSplat, please refer to the [User Guide](https://github.com/playcanvas/supersplat/wiki).
 
 ## Local Development
 
