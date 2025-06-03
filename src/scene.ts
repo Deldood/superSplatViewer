@@ -225,22 +225,21 @@ class Scene {
 
     loadSplatModel(loadRequest: ModelLoadRequest) {
         this.assetLoader.loadModel(loadRequest)
-            .then((splat: Splat) => {
-                this.clear(); // optional: vorherige Splats entfernen
-                this.add(splat); // zur Szene hinzufügen
-                this.forceRender = true;
-    
-            })
-            .catch((err) => {
-                console.error('Failed to load splat model:', err);
-                this.events.fire('error', err);
-            });
+        .then((splat: Splat) => {
+            this.clear(); // optional: vorherige Splats entfernen
+            this.add(splat); // zur Szene hinzufügen
+            this.forceRender = true;
+        })
+        .catch((err) => {
+            console.error('Failed to load splat model:', err);
+            this.events.fire('error', err);
+        });
     }
 
     start() {
         // start the app
-        console.log("loading")
         this.app.start();
+
         this.assetLoader.loadModel({
             url: 'model/IDF.ply',
             filename: 'IDF.ply'

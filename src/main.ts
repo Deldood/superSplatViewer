@@ -19,12 +19,12 @@ import { BrushSelection } from './tools/brush-selection';
 import { LassoSelection } from './tools/lasso-selection';
 import { MoveTool } from './tools/move-tool';
 import { PolygonSelection } from './tools/polygon-selection';
-import { WalkableAreaSelector } from './tools/walkable-area-tool';
 import { RectSelection } from './tools/rect-selection';
 import { RotateTool } from './tools/rotate-tool';
 import { ScaleTool } from './tools/scale-tool';
 import { SphereSelection } from './tools/sphere-selection';
 import { ToolManager } from './tools/tool-manager';
+import { WalkableAreaSelector } from './tools/walkable-area-tool';
 import { registerTransformHandlerEvents } from './transform-handler';
 import { EditorUI } from './ui/editor';
 

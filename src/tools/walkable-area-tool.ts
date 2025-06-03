@@ -1,9 +1,9 @@
-import * as pc from 'playcanvas'; 
+import * as pc from 'playcanvas';
+
 import { Events } from '../events';
 import { Scene } from '../scene';
 
 type Point = { x: number, y: number };
-    
 
 class WalkableAreaSelector {
     private points: Point[] = [];
@@ -17,12 +17,12 @@ class WalkableAreaSelector {
     private scene:Scene;
     private Dpoints:pc.Vec3[] = [];
 
-    constructor(events: Events, parent: HTMLElement, mask: { canvas: HTMLCanvasElement, context: CanvasRenderingContext2D },scene: Scene) {
+    constructor(events: Events, parent: HTMLElement, mask: { canvas: HTMLCanvasElement, context: CanvasRenderingContext2D }, scene: Scene) {
         this.events = events;
         this.parent = parent;
         this.canvas = mask.canvas;
         this.context = mask.context;
-        this.scene = scene
+        this.scene = scene;
 
         // create svg
         this.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -84,41 +84,40 @@ class WalkableAreaSelector {
     private create3DLine(start: pc.Vec3, end: pc.Vec3, app: any) {
         const devise = app.graphicsDevice;
         const positions = [start.x, start.y, start.z, end.x, end.y, end.z];
-    
+
         const vertexFormat = new pc.VertexFormat(app.graphicsDevice, [
             { semantic: pc.SEMANTIC_POSITION, components: 3, type: pc.TYPE_FLOAT32 }
         ]);
-    
+
         const vertexBuffer = new pc.VertexBuffer(app.graphicsDevice, vertexFormat, 2, {
             usage: pc.BUFFER_STATIC
         });
-        
+
         const verts = new Float32Array(vertexBuffer.lock());
         verts.set(positions);
         vertexBuffer.unlock();
-    
+
         const mesh = new pc.Mesh(app.graphicsDevice);
         mesh.vertexBuffer = vertexBuffer;
         mesh.primitive[0].type = pc.PRIMITIVE_LINES;
         mesh.primitive[0].base = 0;
         mesh.primitive[0].count = 2;
         mesh.primitive[0].indexed = false;
-    
+
         const material = new pc.StandardMaterial();
         material.diffuse = new pc.Color(0, 1, 0); // grün
         material.update();
-    
+
         const meshInstance = new pc.MeshInstance(mesh, material);
         const entity = new pc.Entity();
-        entity.addComponent("render", {
+        entity.addComponent('render', {
             meshInstances: [meshInstance],
             castShadows: false
         });
-    
+
         app.root.addChild(entity);
         return entity;
     }
-    
 
     private pointermove = (e: PointerEvent) => {
         this.currentPoint = { x: e.offsetX, y: e.offsetY };
@@ -136,15 +135,13 @@ class WalkableAreaSelector {
     private CameraPos: pc.Vec3;
 
     private pointerup = (e: PointerEvent) => {
-        
-        this.worldPoint = new pc.Vec3(0,0,0); 
+
+        this.worldPoint = new pc.Vec3(0, 0, 0);
         this.CameraPos = this.scene.camera.entity.getPosition();
-    
+
         this.scene.camera.entity.camera.screenToWorld(this.currentPoint.x, this.currentPoint.y, this.CameraPos.y, this.worldPoint);
 
-        this.worldPoint.y= 0;
-
-
+        this.worldPoint.y = 0;
 
         if (e.pointerType === 'mouse' ? e.button === 0 : e.isPrimary) {
             e.preventDefault();
@@ -153,7 +150,7 @@ class WalkableAreaSelector {
             if (this.isClosed()) {
                 const current = this.Dpoints[0];
                 const last = this.Dpoints[this.points.length - 1];
-                this.create3DLine(last,current,this.scene.app)
+                this.create3DLine(last, current, this.scene.app);
                 this.commitSelection(e);
             } else if (this.points.length === 0 || this.dist(this.points[this.points.length - 1], this.currentPoint) > 0) {
                 this.Dpoints.push(this.worldPoint);
@@ -161,11 +158,11 @@ class WalkableAreaSelector {
             }
         }
 
-        if(this.points.length >= 2){
+        if (this.points.length >= 2) {
             const last = this.Dpoints[this.points.length - 2];
             const current = this.Dpoints[this.points.length - 1];
 
-            this.create3DLine(last,current,this.scene.app)
+            this.create3DLine(last, current, this.scene.app);
         }
     };
 
@@ -183,15 +180,13 @@ class WalkableAreaSelector {
     
 
     activate(): void {
-        
 
-        this.scene.camera.ortho= true;
+        this.scene.camera.ortho = true;
 
-        this.XYZPos = new pc.Vec3(0,5,0)
-        this.Rotation = new pc.Vec3(0,0,0)  
-        this.scene.camera.setPose(this.XYZPos,this.Rotation);
+        this.XYZPos = new pc.Vec3(0, 5, 0);
+        this.Rotation = new pc.Vec3(0, 0, 0);
+        this.scene.camera.setPose(this.XYZPos, this.Rotation);
 
-        
         this.svg.style.display = 'inline';
         this.parent.style.display = 'block';
         this.parent.addEventListener('pointerdown', this.pointerdown);
@@ -204,8 +199,8 @@ class WalkableAreaSelector {
 
         console.log(this.Dpoints);
         this.scene.grid.remove();
-        this.scene.camera.setDistance(0,1)
-        this.scene.camera.setFocalPoint(new pc.Vec3(0,0,0), 1 )
+        this.scene.camera.setDistance(0, 1);
+        this.scene.camera.setFocalPoint(new pc.Vec3(0, 0, 0), 1);
         this.scene.camera.ortho = true;
         this.scene.camera.maxElev = 30;
         this.scene.camera.minElev = -30;
@@ -219,46 +214,16 @@ class WalkableAreaSelector {
         this.parent.removeEventListener('dblclick', this.dblclick);
 
         const polygon2D = this.Dpoints.map(p => ({ x: p.x, y: p.z }));
-        this.scene.camera.setWalkablePolygon(polygon2D)
-
-
+        this.scene.camera.setWalkablePolygon(polygon2D);
 
         this.points = [];
         this.paint();
-
-
-
 
     }
 
     getPolygon(): Point[] {
         return this.Dpoints.map(p => ({ x: p.x, y: p.z }));
     }
-
-
-/**
- * Prüft, ob Punkt innerhalb eines 2D-Polygons liegt
- * @param point Der zu testende Punkt
- * @param polygon Die Punkte des Polygons, im Uhrzeigersinn oder Gegenuhrzeigersinn
- * @returns true, wenn Punkt innerhalb liegt
- */
-public isPointInPolygon(point: Point, polygon: Point[]): boolean {
-    let inside = false;
-
-    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-        const xi = polygon[i].x, yi = polygon[i].y;
-        const xj = polygon[j].x, yj = polygon[j].y;
-
-        const intersect =
-            yi > point.y !== yj > point.y &&
-            point.x < (xj - xi) * (point.y - yi) / (yj - yi + 1e-10) + xi;
-
-        if (intersect) inside = !inside;
-    }
-
-    return inside;
-}
-
 }
 
 export { WalkableAreaSelector };

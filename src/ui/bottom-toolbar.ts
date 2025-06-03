@@ -7,10 +7,10 @@ import brushSvg from './svg/select-brush.svg';
 import lassoSvg from './svg/select-lasso.svg';
 import pickerSvg from './svg/select-picker.svg';
 import polygonSvg from './svg/select-poly.svg';
-import walkableSvg from './svg/walkable.svg';
 import sphereSvg from './svg/select-sphere.svg';
 import boxSvg from './svg/show-hide-splats.svg';
 import undoSvg from './svg/undo.svg';
+import walkableSvg from './svg/walkable.svg';
 import { Tooltips } from './tooltips';
 
 const createSvg = (svgString: string) => {
