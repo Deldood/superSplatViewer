@@ -43,7 +43,7 @@ When changes to the source are detected, SuperSplat is rebuilt automatically. Si
 1. ### Load the splat automatically
    To automatically load the gaussian splat (in ply format) you can put in in the <projectroot>/dist/model folder. On startup it will load the model and rotate it to get it        upright (if Gaussian Splatting model was created with splatfacto)
 
-2. ###Remove top of your Model
+2. ### Remove top of your Model
    To make it easier to draw in the Walkable Area you first have to remove the top part of your Model.
    Fist align with the coordiante axis by using the coordinate system in the top right of the screen (clicking on axis)
    Use preferred selection tool to select all Gaussians that should be removed
