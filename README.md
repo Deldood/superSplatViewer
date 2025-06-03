@@ -11,7 +11,7 @@ To initialize a local development environment for SuperSplat, ensure you have [N
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/playcanvas/supersplat.git
+   git clone https://github.com/Deldood/superSplatViewer.git
    cd supersplat
    ```
 
