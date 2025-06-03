@@ -245,7 +245,7 @@ class Scene {
             filename: 'IDF.ply'
         }).then((splat) => {
             this.add(splat);
-            splat.entity.setLocalEulerAngles(90, 0, 0);
+            splat.entity.setLocalEulerAngles(90, 0, 180);
         });
     }
 

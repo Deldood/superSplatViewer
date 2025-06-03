@@ -177,7 +177,7 @@ class WalkableAreaSelector {
 
     private XYZPos: pc.Vec3;
     private Rotation: pc.Vec3;
-    
+
 
     activate(): void {
 
