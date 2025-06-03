@@ -241,8 +241,8 @@ class Scene {
         this.app.start();
 
         this.assetLoader.loadModel({
-            url: 'model/IDF.ply',
-            filename: 'IDF.ply'
+            url: 'model/splat.ply',
+            filename: 'splat.ply'
         }).then((splat) => {
             this.add(splat);
             splat.entity.setLocalEulerAngles(90, 0, 180);
