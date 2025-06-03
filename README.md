@@ -53,11 +53,12 @@ When changes to the source are detected, SuperSplat is rebuilt automatically. Si
    
 3. ### Draw in Walkable Area
    click on the 'Define Walkalbe Area' button in the bottom toolbar.
-   Before Drawing in your the line you sould make sure you see the whole Area, where you want to draw in your line (Zooming in and out <mouse wheel > while drawing is not          advised and panning < hold right mouse button > is not possible)
+   Before Drawing in your the line you sould make sure you see the whole Area, where you want to draw in your line
+   (Zooming in and out -mouse wheel scroll- is not advised and panning -hold right mouse button- is not possible while drawing)
    Left click to begin tracing out your Walkabale Area. To finish connect last line to the starting point.
    press ctrl + Z twice to respawn gaussians
 
-4. ### Going into first person view
+5. ### Going into first person view
    By reselecting the Walkable Area Tool in the bottom Toolbar you get transportet to first person View.
    Hold left mouse button to look around and arrow keys to move.
 
