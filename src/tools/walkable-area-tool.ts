@@ -206,6 +206,7 @@ class WalkableAreaSelector {
         this.scene.camera.minElev = -30;
         this.scene.camera.flySpeed = 0.1;
         this.scene.camera.fov = 120;
+        this.scene.events.fire('camera.toggleOverlay');
         this.svg.style.display = 'none';
         this.parent.style.display = 'none';
         this.parent.removeEventListener('pointerdown', this.pointerdown);

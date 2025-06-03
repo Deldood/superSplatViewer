@@ -476,8 +476,8 @@ class Camera extends Element {
                 cameraPosition.mulScalar(distance.distance * this.sceneRadius / this.fovFactor);
                 cameraPosition.add(this.focalPointTween.value);
                 cameraPosition.y = 0;
-                
-            }else if (inside) {
+
+            } else if (inside) {
 
                 this.savedFocalTween = this.focalPointTween.clone();
                 this.wasInside = true;
