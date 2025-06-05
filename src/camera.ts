@@ -461,7 +461,7 @@ class Camera extends Element {
 
 
         if (this.walkablePolygon && this.walkablePolygon.length > 2) {
-            cameraPosition.y = 0;
+            cameraPosition.y = 0.01;
 
             const checkPoint = { x: this.focalPointTween.target.x, y: this.focalPointTween.target.z };
             const inside = this.isPointInPolygon(checkPoint, this.walkablePolygon);
@@ -475,7 +475,7 @@ class Camera extends Element {
                 cameraPosition.copy(forwardVec);
                 cameraPosition.mulScalar(distance.distance * this.sceneRadius / this.fovFactor);
                 cameraPosition.add(this.focalPointTween.value);
-                cameraPosition.y = 0;
+                cameraPosition.y = 0.01;
 
             } else if (inside) {
 
