@@ -46,19 +46,19 @@ When changes to the source are detected, SuperSplat is rebuilt automatically. Si
    To automatically load the gaussian splat (in ply format) you can put in in the projectroot/dist/model folder. On startup it will load the model and rotate it to get it        upright (if Gaussian Splatting model was created with splatfacto)
 
 2. ### Remove top of your Model
-   To make it easier to draw in the Walkable Area you first have to remove the top part of your Model.
-   Fist align with the coordiante axis by using the coordinate system in the top right of the screen (clicking on axis)
+   To make it easier to draw in the Walkable Area you may remove the top part of your Model.
+   Then align the Camera with the coordiante axis by using the coordinate system in the top right of the screen (clicking on axis)
    Use preferred selection tool to select all Gaussians that should be removed
    Press del
    
 3. ### Draw in Walkable Area
    click on the 'Define Walkalbe Area' button in the bottom toolbar.
-   Before Drawing in your the line you sould make sure you see the whole Area, where you want to draw in your line
+   Before Drawing in the Outline you sould make sure you see the whole Area, where you want to draw 
    (Zooming in and out -mouse wheel scroll- is not advised and panning -hold right mouse button- is not possible while drawing)
-   Left click to begin tracing out your Walkabale Area. To finish connect last line to the starting point.
-   press ctrl + Z twice to respawn gaussians
+   Left click to begin tracing out the Walkabale Area. To finish connect last line to the starting point.
+   press ctrl + Z twice to respawn previous deleted gaussians
 
 5. ### Going into first person view
-   By reselecting the Walkable Area Tool in the bottom Toolbar you get transportet to first person View.
-   Hold left mouse button to look around and arrow keys to move.
+   By reselecting the Walkable Area Tool in the bottom Toolbar you get transportet to first person view.
+   Hold left mouse button to look around and press the arrow keys to move.
 
