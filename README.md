@@ -47,8 +47,8 @@ When changes to the source are detected, SuperSplat is rebuilt automatically. Si
 
 2. ### Remove top of your Model
    To make it easier to draw in the Walkable Area you may remove the top part of your Model.
-   Then align the Camera with the coordiante axis by using the coordinate system in the top right of the screen (clicking on axis)
-   Use preferred selection tool to select all Gaussians that should be removed
+   First align the Camera with the coordiante axis by using the coordinate system in the top right of the screen (click on the axis, so the model is seen from the side)
+   Use preferred selection tool to select all Gaussians that should be removed (square selection Tool works best)
    Press del
    
 3. ### Draw in Walkable Area
